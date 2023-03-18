@@ -1,6 +1,7 @@
 import Head from "next/head";
-import { Hero } from "src/components";
+import { Box } from "@mui/system";
 import Layout from "src/layout/layout";
+import { Content, Hero, Sidebar } from "src/components";
 
 const IndexPage = () => {
   return (
@@ -9,6 +10,10 @@ const IndexPage = () => {
         <title>Index Page</title>
       </Head>
       <Hero />
+      <Box sx={{ display: "flex", gap: "20px", padding: "20px" }}>
+        <Sidebar />
+        <Content />
+      </Box>
     </Layout>
   );
 };

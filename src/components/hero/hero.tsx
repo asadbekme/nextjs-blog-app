@@ -14,7 +14,7 @@ const Hero = () => {
   };
 
   return (
-    <Box width={"100%"} height={"90vh"} sx={{ backgroundColor: "red" }}>
+    <Box width={"100%"} height={"90vh"} sx={{ backgroundColor: "black" }}>
       <Carousel responsive={responsive}>
         {data.map((item, idx) => (
           <Box key={idx}>
