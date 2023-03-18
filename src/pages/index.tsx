@@ -10,7 +10,14 @@ const IndexPage = () => {
         <title>Index Page</title>
       </Head>
       <Hero />
-      <Box sx={{ display: "flex", gap: "20px", padding: "20px" }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: { xs: "column", md: "row" },
+          gap: "20px",
+          padding: "20px",
+        }}
+      >
         <Sidebar />
         <Content />
       </Box>

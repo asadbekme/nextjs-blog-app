@@ -14,11 +14,20 @@ const Hero = () => {
   };
 
   return (
-    <Box width={"100%"} height={"90vh"} sx={{ backgroundColor: "black" }}>
+    <Box
+      width={"100%"}
+      sx={{ backgroundColor: "black", height: { xs: "70vh", md: "90vh" } }}
+    >
       <Carousel responsive={responsive}>
         {data.map((item, idx) => (
           <Box key={idx}>
-            <Box sx={{ position: "relative", width: "100%", height: "90vh" }}>
+            <Box
+              sx={{
+                position: "relative",
+                width: "100%",
+                height: { xs: "70vh", md: "90vh" },
+              }}
+            >
               <Image
                 src={item.image}
                 alt={item.title}
@@ -39,17 +48,23 @@ const Hero = () => {
               />
               <Box
                 sx={{
-                  width: { xs: "100%", sm: "70%" },
+                  width: { xs: "100%", md: "70%" },
                   position: "relative",
                   color: "white",
                   zIndex: 99,
                   top: "50%",
                   transform: "translateY(-50%)",
-                  paddingLeft: { xs: "10px", sm: "40px" },
+                  paddingLeft: { xs: "20px", md: "50px" },
                 }}
               >
-                <Typography variant="h3">{item.title}</Typography>
-                <Typography variant="h5">{item.exerpt}</Typography>
+                <Typography sx={{ fontSize: { xs: "30px", md: "50px" } }}>
+                  {item.title}
+                </Typography>
+                <Typography
+                  sx={{ fontSize: { xs: "20px", md: "25px" }, color: "gray" }}
+                >
+                  {item.exerpt}
+                </Typography>
                 <Box
                   sx={{
                     display: "flex",
