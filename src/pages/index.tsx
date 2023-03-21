@@ -1,14 +1,15 @@
-import Head from "next/head";
+import { GetServerSideProps } from "next";
 import { Box } from "@mui/system";
 import Layout from "src/layout/layout";
 import { Content, Hero, Sidebar } from "src/components";
+import { BlogsService } from "src/services/blog.service";
+import { BlogsType } from "src/interfaces/blogs.interface";
 
-const IndexPage = () => {
+const IndexPage = ({ blogs }: HomePageProps) => {
+  console.log(blogs);
+
   return (
     <Layout>
-      <Head>
-        <title>Index Page</title>
-      </Head>
       <Hero />
       <Box
         sx={{
@@ -26,3 +27,19 @@ const IndexPage = () => {
 };
 
 export default IndexPage;
+
+export const getServerSideProps: GetServerSideProps<HomePageProps> = async () => {
+  const blogs = await BlogsService.getAllBlogs();
+
+  return {
+    props: {
+      blogs: blogs,
+      message: "Message from SSR",
+    },
+  };
+};
+
+interface HomePageProps {
+  blogs: BlogsType[];
+  message: string;
+}
