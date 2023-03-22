@@ -17,7 +17,7 @@ export const data = [
   {
     image: "https://media.graphassets.com/MxJZhmooRRuudoErkQ38",
     title: "Technical SEO with Hygraph",
-    exerpt:
+    excerpt:
       "Get started with your SEO implementation when using a Headless CMS",
     author: {
       name: "Samar Badriddinov",
@@ -27,7 +27,7 @@ export const data = [
   {
     image: "https://media.graphassets.com/bh3K2NNtTHCN260Xfq9h",
     title: "Union Types and Sortable Relations with Hygraph",
-    exerpt:
+    excerpt:
       "Learn more about Polymorphic Relations and Sortable Relations with Hygraph",
     author: {
       name: "Samar Badriddinov",

@@ -1,11 +1,11 @@
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { Avatar, Box, Typography } from "@mui/material";
-import { data } from "src/config/constants";
 import Image from "next/image";
 import { format } from "date-fns";
+import { HeroProps } from "./hero.props";
 
-const Hero = () => {
+const Hero = ({ blogs }: HeroProps) => {
   const responsive = {
     gadget: {
       breakpoint: { max: 4000, min: 0 },
@@ -19,8 +19,8 @@ const Hero = () => {
       sx={{ backgroundColor: "black", height: { xs: "70vh", md: "90vh" } }}
     >
       <Carousel responsive={responsive}>
-        {data.map((item, idx) => (
-          <Box key={idx}>
+        {blogs.map((item, idx) => (
+          <Box key={item.id}>
             <Box
               sx={{
                 position: "relative",
@@ -29,7 +29,7 @@ const Hero = () => {
               }}
             >
               <Image
-                src={item.image}
+                src={item.image.url}
                 alt={item.title}
                 fill
                 style={{ objectFit: "cover" }}
@@ -63,7 +63,7 @@ const Hero = () => {
                 <Typography
                   sx={{ fontSize: { xs: "20px", md: "25px" }, color: "gray" }}
                 >
-                  {item.exerpt}
+                  {item.excerpt}
                 </Typography>
                 <Box
                   sx={{
@@ -73,10 +73,13 @@ const Hero = () => {
                     marginTop: "20px",
                   }}
                 >
-                  <Avatar alt={item.author.name} src={item.author.image} />
+                  <Avatar alt={item.author.name} src={item.author.avatar.url} />
                   <Box>
                     <Typography>{item.author.name}</Typography>
-                    <Box>{format(new Date(), "dd MMM, yyyy")} • 10min read</Box>
+                    <Box>
+                      {format(new Date(item.createdAt), "dd MMM, yyyy")} • 10min
+                      read
+                    </Box>
                   </Box>
                 </Box>
               </Box>

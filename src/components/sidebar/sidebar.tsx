@@ -2,10 +2,11 @@ import { Typography, Button, Divider, Avatar } from "@mui/material";
 import { Box } from "@mui/system";
 import Image from "next/image";
 import { Fragment } from "react";
-import { data, navItems } from "src/config/constants";
 import { format } from "date-fns";
+import { SidebarProps } from "./sidebar.props";
+// import { data, navItems } from "src/config/constants";
 
-const Sidebar = () => {
+const Sidebar = ({ latestBlogs, categories }: SidebarProps) => {
   return (
     <Box width={{ xs: "100%", md: "30%" }}>
       <Box
@@ -22,8 +23,8 @@ const Sidebar = () => {
           <Box
             sx={{ display: "flex", flexDirection: "column", marginTop: "20px" }}
           >
-            {data.map((item) => (
-              <Box key={item.title} sx={{ marginTop: "10px" }}>
+            {latestBlogs.map((item) => (
+              <Box key={item.id} sx={{ marginTop: "10px" }}>
                 <Box
                   sx={{
                     display: "flex",
@@ -32,7 +33,7 @@ const Sidebar = () => {
                   }}
                 >
                   <Image
-                    src={item.image}
+                    src={item.image.url}
                     alt={item.title}
                     width={100}
                     height={100}
@@ -53,13 +54,16 @@ const Sidebar = () => {
                         gap: "10px",
                       }}
                     >
-                      <Avatar alt={item.author.name} src={item.author.image} />
+                      <Avatar
+                        alt={item.author.name}
+                        src={item.author.avatar.url}
+                      />
                       <Box>
                         <Typography variant="subtitle2">
                           {item.author.name}
                         </Typography>
                         <Typography variant="body1" sx={{ opacity: "0.6" }}>
-                          {format(new Date(), "dd MMM, yyyy")}
+                          {format(new Date(item.createdAt), "dd MMM, yyyy")}
                         </Typography>
                       </Box>
                     </Box>
@@ -82,10 +86,10 @@ const Sidebar = () => {
           <Box
             sx={{ display: "flex", flexDirection: "column", marginTop: "20px" }}
           >
-            {navItems.map((item) => (
-              <Fragment key={item.route}>
+            {categories.map((category) => (
+              <Fragment key={category.slug}>
                 <Button sx={{ justifyContent: "flex-start", height: "50px" }}>
-                  {item.label}
+                  {category.label}
                 </Button>
                 <Divider />
               </Fragment>

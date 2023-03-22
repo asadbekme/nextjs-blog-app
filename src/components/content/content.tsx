@@ -2,14 +2,14 @@ import Image from "next/image";
 import { Box } from "@mui/system";
 import { Avatar, Divider, Typography } from "@mui/material";
 import { format } from "date-fns";
-import { data } from "src/config/constants";
+import { ContentProps } from "./content.props";
 
-const Content = () => {
+const Content = ({ blogs }: ContentProps) => {
   return (
     <Box width={{ xs: "100%", md: "70%" }}>
-      {data.map((item) => (
+      {blogs.map((blog) => (
         <Box
-          key={item.image}
+          key={blog.id}
           sx={{
             background: "rgba(0, 0, 0, .5)",
             padding: "20px",
@@ -26,17 +26,17 @@ const Content = () => {
             }}
           >
             <Image
-              src={item.image}
-              alt={item.title}
+              src={blog.image.url}
+              alt={blog.title}
               fill
               style={{ objectFit: "cover", borderRadius: "10px" }}
             />
           </Box>
           <Typography variant="h4" marginTop={"25px"}>
-            {item.title}
+            {blog.title}
           </Typography>
           <Typography variant="body1" color={"gray"}>
-            {item.exerpt}
+            {blog.excerpt}
           </Typography>
           <Divider sx={{ marginTop: "25px" }} />
           <Box
@@ -47,11 +47,11 @@ const Content = () => {
               marginTop: "20px",
             }}
           >
-            <Avatar alt={item.author.name} src={item.author.image} />
+            <Avatar alt={blog.author.name} src={blog.author.avatar.url} />
             <Box>
-              <Typography>{item.author.name}</Typography>
+              <Typography>{blog.author.name}</Typography>
               <Box color={"gray"}>
-                {format(new Date(), "dd MMM, yyyy")} • 10min read
+                {format(new Date(blog.createdAt), "dd MMM, yyyy")} • 10min read
               </Box>
             </Box>
           </Box>

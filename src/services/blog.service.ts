@@ -1,5 +1,6 @@
 import { request, gql } from "graphql-request";
 import { BlogsType } from "src/interfaces/blogs.interface";
+import { CategoryType } from "src/interfaces/categories.interface";
 const graphqlAPI = process.env.NEXT_PUBLIC_HYGRAPH_ENDPOINT as string;
 
 export const BlogsService = {
@@ -11,6 +12,7 @@ export const BlogsService = {
           id
           slug
           title
+          createdAt
           image {
             url
           }
@@ -30,5 +32,47 @@ export const BlogsService = {
 
     const result = await request<{ blogs: BlogsType[] }>(graphqlAPI, query);
     return result.blogs;
+  },
+
+  async getLatestBlogs() {
+    const query = gql`
+      query GetLatestBlogs {
+        blogs(last: 3) {
+          title
+          slug
+          id
+          createdAt
+          author {
+            name
+            avatar {
+              url
+            }
+          }
+          image {
+            url
+          }
+        }
+      }
+    `;
+
+    const result = await request<{ blogs: BlogsType[] }>(graphqlAPI, query);
+    return result.blogs;
+  },
+
+  async getCategories() {
+    const query = gql`
+      query GetCategories {
+        categories {
+          slug
+          label
+        }
+      }
+    `;
+
+    const result = await request<{ categories: CategoryType[] }>(
+      graphqlAPI,
+      query
+    );
+    return result.categories;
   },
 };
