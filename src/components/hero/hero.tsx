@@ -4,6 +4,7 @@ import { Avatar, Box, Typography } from "@mui/material";
 import Image from "next/image";
 import { format } from "date-fns";
 import { HeroProps } from "./hero.props";
+import { calculateEstimatedTimeToRead } from "src/helpers/time.format";
 
 const Hero = ({ blogs }: HeroProps) => {
   const responsive = {
@@ -77,7 +78,8 @@ const Hero = ({ blogs }: HeroProps) => {
                   <Box>
                     <Typography>{item.author.name}</Typography>
                     <Box>
-                      {format(new Date(item.createdAt), "dd MMM, yyyy")} • 10min
+                      {format(new Date(item.createdAt), "dd MMM, yyyy")} • {""}
+                      {calculateEstimatedTimeToRead(item.description.text)} min
                       read
                     </Box>
                   </Box>
