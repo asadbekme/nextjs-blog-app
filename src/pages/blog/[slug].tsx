@@ -10,11 +10,7 @@ import Layout from "src/layout/layout";
 import { BlogsService } from "src/services/blog.service";
 import { format } from "date-fns";
 
-const DetailedBlogsPage = ({
-  blog,
-  latestBlogs,
-  categories,
-}: DetailedBlogsPageProps) => {
+const DetailedBlogsPage = ({ blog, latestBlogs, categories }: DetailedBlogsPageProps) => {
   return (
     <Layout>
       <Box

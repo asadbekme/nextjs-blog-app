@@ -95,7 +95,10 @@ const Sidebar = ({ latestBlogs, categories }: SidebarProps) => {
           >
             {categories.map((category) => (
               <Fragment key={category.slug}>
-                <Button sx={{ justifyContent: "flex-start", height: "50px" }}>
+                <Button
+                  onClick={() => router.push(`/category/${category.slug}`)}
+                  sx={{ justifyContent: "flex-start", height: "50px" }}
+                >
                   {category.label}
                 </Button>
                 <Divider />

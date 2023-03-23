@@ -117,4 +117,39 @@ export const BlogsService = {
     });
     return result.blog;
   },
+
+  async getDetailedCategoryBlogs(slug: string) {
+    const query = gql`
+      query GetCategoryBlogs($slug: String!) {
+        blogs(where: { category: { slug: $slug } }) {
+          excerpt
+          id
+          slug
+          title
+          createdAt
+          image {
+            url
+          }
+          author {
+            name
+            avatar {
+              url
+            }
+          }
+          category {
+            label
+            slug
+          }
+          description {
+            text
+          }
+        }
+      }
+    `;
+
+    const result = await request<{ blogs: BlogsType[] }>(graphqlAPI, query, {
+      slug,
+    });
+    return result.blogs;
+  },
 };
