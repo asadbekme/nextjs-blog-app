@@ -27,7 +27,9 @@ const IndexPage = ({ blogs, latestBlogs, categories }: HomePageProps) => {
 
 export default IndexPage;
 
-export const getServerSideProps: GetServerSideProps<HomePageProps> = async () => {
+export const getServerSideProps: GetServerSideProps<
+  HomePageProps
+> = async () => {
   const blogs = await BlogsService.getAllBlogs();
   const latestBlogs = await BlogsService.getLatestBlogs();
   const categories = await BlogsService.getCategories();

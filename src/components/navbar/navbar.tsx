@@ -39,7 +39,14 @@ const Navbar = ({ window }: Props) => {
           padding: "0 20px",
         }}
       >
-        <Box sx={{ display: "flex", alignItems: "center", gap: "7px", my: 2 }}>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            gap: "7px",
+            my: 2,
+          }}
+        >
           <MenuBookIcon />
           <Typography variant="h6">Blogs</Typography>
         </Box>

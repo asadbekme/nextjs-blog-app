@@ -4,8 +4,12 @@ import { Avatar, Divider, Typography } from "@mui/material";
 import { format } from "date-fns";
 import { ContentProps } from "./content.props";
 import { calculateEstimatedTimeToRead } from "src/helpers/time.format";
+import { useRouter } from "next/router";
+// import Link from "next/link";
 
 const Content = ({ blogs }: ContentProps) => {
+  const router = useRouter();
+
   return (
     <Box width={{ xs: "100%", md: "70%" }}>
       {blogs.map((blog) => (
@@ -17,7 +21,9 @@ const Content = ({ blogs }: ContentProps) => {
             marginTop: "20px",
             borderRadius: "10px",
             boxShadow: "0 8px 16px rgba(255, 255, 255, 0.2)",
+            cursor: "pointer",
           }}
+          onClick={() => router.push(`blog/${blog.slug}`)}
         >
           <Box
             sx={{
