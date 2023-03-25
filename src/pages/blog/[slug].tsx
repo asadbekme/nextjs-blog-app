@@ -9,70 +9,78 @@ import { CategoryType } from "src/interfaces/categories.interface";
 import Layout from "src/layout/layout";
 import { BlogsService } from "src/services/blog.service";
 import { format } from "date-fns";
+import SEO from "src/layout/seo/seo";
 
-const DetailedBlogsPage = ({ blog, latestBlogs, categories }: DetailedBlogsPageProps) => {
+const DetailedBlogsPage = ({
+  blog,
+  latestBlogs,
+  categories,
+}: DetailedBlogsPageProps) => {
   return (
-    <Layout>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: { xs: "column", md: "row" },
-          gap: "20px",
-          padding: "20px",
-        }}
-      >
-        <Box width={{ xs: "100%", md: "70%" }}>
-          <Box
-            sx={{
-              background: "rgba(0, 0, 0, .5)",
-              padding: "20px",
-              borderRadius: "10px",
-              boxShadow: "0 8px 16px rgba(255, 255, 255, 0.2)",
-              position: "relative",
-              width: "100%",
-              height: { xs: "30vh", md: "60vh" },
-              marginY: "20px",
-            }}
-          >
-            <Image
-              src={blog.image.url}
-              alt={blog.title}
-              fill
-              style={{ objectFit: "cover", borderRadius: "10px" }}
-            />
-          </Box>
-          <Box
-            sx={{ display: "flex", flexDirection: "column", rowGap: "10px" }}
-          >
+    <SEO metaTitle={blog.title}>
+      <Layout>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: { xs: "column", md: "row" },
+            gap: "20px",
+            padding: "20px",
+          }}
+        >
+          <Box width={{ xs: "100%", md: "70%" }}>
             <Box
               sx={{
-                display: "flex",
-                alignItems: "center",
-                gap: "10px",
-                marginTop: "20px",
+                background: "rgba(0, 0, 0, .5)",
+                padding: "20px",
+                borderRadius: "10px",
+                boxShadow: "0 8px 16px rgba(255, 255, 255, 0.2)",
+                position: "relative",
+                width: "100%",
+                height: { xs: "30vh", md: "60vh" },
+                marginY: "20px",
               }}
             >
-              <Avatar alt={blog.author.name} src={blog.author.avatar.url} />
-              <Box>
-                <Typography>{blog.author.name}</Typography>
-                <Box color={"gray"}>
-                  {format(new Date(blog.createdAt), "dd MMM, yyyy")} •{" "}
-                  {calculateEstimatedTimeToRead(blog.description.text)} min read
+              <Image
+                src={blog.image.url}
+                alt={blog.title}
+                fill
+                style={{ objectFit: "cover", borderRadius: "10px" }}
+              />
+            </Box>
+            <Box
+              sx={{ display: "flex", flexDirection: "column", rowGap: "10px" }}
+            >
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "10px",
+                  marginTop: "20px",
+                }}
+              >
+                <Avatar alt={blog.author.name} src={blog.author.avatar.url} />
+                <Box>
+                  <Typography>{blog.author.name}</Typography>
+                  <Box color={"gray"}>
+                    {format(new Date(blog.createdAt), "dd MMM, yyyy")} •{" "}
+                    {calculateEstimatedTimeToRead(blog.description.text)} min
+                    read
+                  </Box>
                 </Box>
               </Box>
+              <Typography variant="h3">{blog.title}</Typography>
+              <Typography color={"gray"}>{blog.excerpt}</Typography>
+              <Divider />
+              <div
+                style={{ opacity: "0.9" }}
+                dangerouslySetInnerHTML={{ __html: blog.description.html }}
+              />
             </Box>
-            <Typography variant="h3">{blog.title}</Typography>
-            <Typography color={"gray"}>{blog.excerpt}</Typography>
-            <Divider />
-            <div
-              style={{ opacity: "0.9" }}
-              dangerouslySetInnerHTML={{ __html: blog.description.html }}
-            />
           </Box>
+          <Sidebar latestBlogs={latestBlogs} categories={categories} />
         </Box>
-        <Sidebar latestBlogs={latestBlogs} categories={categories} />
-      </Box>
-    </Layout>
+      </Layout>
+    </SEO>
   );
 };
 
