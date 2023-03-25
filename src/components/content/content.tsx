@@ -23,7 +23,7 @@ const Content = ({ blogs }: ContentProps) => {
             boxShadow: "0 8px 16px rgba(255, 255, 255, 0.2)",
             cursor: "pointer",
           }}
-          onClick={() => router.push(`blog/${blog.slug}`)}
+          onClick={() => router.push(`/blog/${blog.slug}`)}
         >
           <Box
             sx={{

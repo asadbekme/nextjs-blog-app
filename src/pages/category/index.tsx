@@ -14,8 +14,8 @@ const CategoryPage = ({ categories }: CategoryPageProps) => {
     <SEO metaTitle="All Categories">
       <Layout>
         <Box
-          height={{ xs: "30vh", md: "50vh" }}
-          width={{ xs: "100%", md: "80%" }}
+          height={{ xs: "60vh", md: "70vh" }}
+          width={{ xs: "96%", md: "80%" }}
           marginX={"auto"}
           marginTop={"10vh"}
           sx={{
@@ -34,11 +34,12 @@ const CategoryPage = ({ categories }: CategoryPageProps) => {
           <ButtonGroup
             variant="contained"
             aria-label="outlined primary button group"
+            sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'initial' } }}
           >
             {categories.map((category) => (
               <Button
                 key={category.slug}
-                sx={{ fontWeight: "bold" }}
+                sx={{ fontWeight: "bolder" }}
                 onClick={() => router.push(`/category/${category.slug}`)}
               >
                 # {category.label}
@@ -53,9 +54,7 @@ const CategoryPage = ({ categories }: CategoryPageProps) => {
 
 export default CategoryPage;
 
-export const getServerSideProps: GetServerSideProps<
-  CategoryPageProps
-> = async () => {
+export const getServerSideProps: GetServerSideProps<CategoryPageProps> = async () => {
   const categories = await BlogsService.getCategories();
 
   return {

@@ -8,12 +8,9 @@ import { Content, Sidebar } from "src/components";
 import { useRouter } from "next/router";
 import SEO from "src/layout/seo/seo";
 
-const CategoryDetailedPage = ({
-  blogs,
-  latestBlogs,
-  categories,
-}: DetailedCategoryBlogsPageProps) => {
+const CategoryDetailedPage = ({ blogs, latestBlogs, categories }: DetailedCategoryBlogsPageProps) => {
   const router = useRouter();
+
   return (
     <SEO metaTitle={`${router.query.slug}-category`}>
       <Layout>
@@ -35,12 +32,8 @@ const CategoryDetailedPage = ({
 
 export default CategoryDetailedPage;
 
-export const getServerSideProps: GetServerSideProps<
-  DetailedCategoryBlogsPageProps
-> = async ({ query }) => {
-  const blogs = await BlogsService.getDetailedCategoryBlogs(
-    query.slug as string
-  );
+export const getServerSideProps: GetServerSideProps<DetailedCategoryBlogsPageProps> = async ({ query }) => {
+  const blogs = await BlogsService.getDetailedCategoryBlogs(query.slug as string);
   const latestBlogs = await BlogsService.getLatestBlogs();
   const categories = await BlogsService.getCategories();
 

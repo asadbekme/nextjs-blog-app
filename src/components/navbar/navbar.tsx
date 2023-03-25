@@ -1,7 +1,6 @@
 import { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-import MenuBookIcon from "@mui/icons-material/MenuBook";
 import { navItems } from "src/config/constants";
 import {
   Box,
@@ -18,6 +17,7 @@ import {
   ListItemText,
 } from "@mui/material";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 interface Props {
   window?: () => Window;
@@ -32,7 +32,7 @@ const Navbar = ({ window }: Props) => {
   };
 
   const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
+    <Box sx={{ textAlign: "center" }}>
       <Box
         sx={{
           display: "flex",
@@ -49,16 +49,19 @@ const Navbar = ({ window }: Props) => {
             my: 2,
           }}
         >
-          <MenuBookIcon />
-          <Typography variant="h6">Blogs</Typography>
+          <Image src={"/favicon.svg"} alt="logo" width={50} height={42} />
+          <Typography variant="h5">Blogs</Typography>
         </Box>
-        <CloseIcon sx={{ cursor: "pointer" }} />
+        <CloseIcon sx={{ cursor: "pointer" }} onClick={handleDrawerToggle} />
       </Box>
       <Divider />
       <List>
         {navItems.map((item) => (
           <ListItem key={item.route} disablePadding>
-            <ListItemButton sx={{ textAlign: "center" }}>
+            <ListItemButton
+              onClick={() => router.push(`/${item.route}`)}
+              sx={{ textAlign: "center" }}
+            >
               <ListItemText primary={item.label} />
             </ListItemButton>
           </ListItem>
@@ -89,17 +92,23 @@ const Navbar = ({ window }: Props) => {
               flexGrow: 1,
               alignItems: "center",
               gap: "8px",
+              cursor: "pointer",
             }}
+            onClick={() => router.push("/")}
           >
-            <MenuBookIcon />
-            <Typography variant="h6">Blogs</Typography>
+            <Image src={"/favicon.svg"} alt="logo" width={50} height={42} />
+            <Typography variant="h5">Blogs</Typography>
           </Box>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (
               <Button
                 onClick={() => router.push(`/${item.route}`)}
                 key={item.route}
-                sx={{ color: "#fff" }}
+                sx={{
+                  color: "#fff",
+                  margin: "8px",
+                  fontSize: "14px",
+                }}
               >
                 {item.label}
               </Button>

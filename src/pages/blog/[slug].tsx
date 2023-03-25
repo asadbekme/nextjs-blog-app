@@ -11,11 +11,7 @@ import { BlogsService } from "src/services/blog.service";
 import { format } from "date-fns";
 import SEO from "src/layout/seo/seo";
 
-const DetailedBlogsPage = ({
-  blog,
-  latestBlogs,
-  categories,
-}: DetailedBlogsPageProps) => {
+const DetailedBlogsPage = ({ blog, latestBlogs, categories }: DetailedBlogsPageProps) => {
   return (
     <SEO metaTitle={blog.title}>
       <Layout>
@@ -86,9 +82,7 @@ const DetailedBlogsPage = ({
 
 export default DetailedBlogsPage;
 
-export const getServerSideProps: GetServerSideProps<
-  DetailedBlogsPageProps
-> = async ({ query }) => {
+export const getServerSideProps: GetServerSideProps<DetailedBlogsPageProps> = async ({ query }) => {
   const blog = await BlogsService.getDetailedBlogs(query.slug as string);
   const latestBlogs = await BlogsService.getLatestBlogs();
   const categories = await BlogsService.getCategories();
