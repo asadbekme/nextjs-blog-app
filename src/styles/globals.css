@@ -2,3 +2,7 @@ body {
   background: #141414;
   color: #fff;
 }
+
+#nprogress .bar {
+  z-index: 1100 !important;
+}
