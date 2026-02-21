@@ -17,7 +17,12 @@ const DetailedBlogsPage = ({
   categories,
 }: DetailedBlogsPageProps) => {
   return (
-    <SEO metaTitle={blog.title}>
+    <SEO
+      metaTitle={blog.title}
+      metaDescription={blog.description.text}
+      opengraphImage={blog.image.url}
+      // opengraphUrl={`https://blog-app.asadbekjs.uz/blog/${blog.slug}`}
+    >
       <Layout>
         <Box
           sx={{

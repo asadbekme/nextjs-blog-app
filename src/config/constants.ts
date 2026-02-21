@@ -21,7 +21,8 @@ export const data = [
       "Get started with your SEO implementation when using a Headless CMS",
     author: {
       name: "Asadbek Rakhimov",
-      image: "https://media.graphassets.com/DkfNqQNGRz2F4UFntKQx",
+      image:
+        "https://us-east-1-shared-usea1-02.graphassets.com/A2erVEXLmToWgOBwbU6zez/KSYPHIyMQJ6wJY6r6kqt",
     },
   },
   {
@@ -31,7 +32,8 @@ export const data = [
       "Learn more about Polymorphic Relations and Sortable Relations with Hygraph",
     author: {
       name: "Asadbek Rakhimov",
-      image: "https://media.graphassets.com/DkfNqQNGRz2F4UFntKQx",
+      image:
+        "https://us-east-1-shared-usea1-02.graphassets.com/A2erVEXLmToWgOBwbU6zez/KSYPHIyMQJ6wJY6r6kqt",
     },
   },
 ];
