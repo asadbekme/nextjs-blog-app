@@ -55,18 +55,20 @@ const Navbar = ({ window }: Props) => {
         <CloseIcon sx={{ cursor: "pointer" }} onClick={handleDrawerToggle} />
       </Box>
       <Divider />
-      <List>
-        {navItems.map((item) => (
-          <ListItem key={item.route} disablePadding>
-            <ListItemButton
-              onClick={() => router.push(`/${item.route}`)}
-              sx={{ textAlign: "center" }}
-            >
-              <ListItemText primary={item.label} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
+      <Box component={"nav"}>
+        <List>
+          {navItems.map((item) => (
+            <ListItem key={item.route} disablePadding>
+              <ListItemButton
+                onClick={() => router.push(`/${item.route}`)}
+                sx={{ textAlign: "center" }}
+              >
+                <ListItemText primary={item.label} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+      </Box>
     </Box>
   );
 
@@ -75,20 +77,14 @@ const Navbar = ({ window }: Props) => {
 
   return (
     <Box height={"8vh"} sx={{ display: "flex" }}>
-      <AppBar sx={{ height: "8vh", background: "#141414" }} component={"nav"}>
+      <AppBar
+        sx={{ height: "8vh", background: "#141414" }}
+        component={"header"}
+      >
         <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: "none" } }}
-          >
-            <MenuIcon />
-          </IconButton>
           <Box
             sx={{
-              display: { xs: "none", sm: "flex" },
+              display: "flex",
               flexGrow: 1,
               alignItems: "center",
               gap: "8px",
@@ -99,7 +95,7 @@ const Navbar = ({ window }: Props) => {
             <Image src={"/favicon.svg"} alt="logo" width={50} height={42} />
             <Typography variant="h5">Blogs</Typography>
           </Box>
-          <Box sx={{ display: { xs: "none", sm: "block" } }}>
+          <Box sx={{ display: { xs: "none", sm: "block" } }} component={"nav"}>
             {navItems.map((item) => (
               <Button
                 onClick={() => router.push(`/${item.route}`)}
@@ -114,6 +110,15 @@ const Navbar = ({ window }: Props) => {
               </Button>
             ))}
           </Box>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+            sx={{ mr: 2, display: { sm: "none" } }}
+          >
+            <MenuIcon />
+          </IconButton>
         </Toolbar>
       </AppBar>
       <Box component="nav">
