@@ -1,7 +1,7 @@
-import { BlogsType } from "src/interfaces/blogs.interface";
-import { CategoryType } from "src/interfaces/categories.interface";
+import { BlogType } from "@/types/blog";
+import { CategoryType } from "@/types/category";
 
 export interface SidebarProps {
-  latestBlogs: BlogsType[];
+  latestBlogs: BlogType[];
   categories: CategoryType[];
 }

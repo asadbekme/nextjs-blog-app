@@ -1,6 +1,6 @@
 import { request, gql } from "graphql-request";
-import { BlogsType } from "src/interfaces/blogs.interface";
-import { CategoryType } from "src/interfaces/categories.interface";
+import { BlogType } from "@/types/blog";
+import { CategoryType } from "@/types/category";
 
 const graphqlAPI = process.env.NEXT_PUBLIC_HYGRAPH_ENDPOINT as string;
 
@@ -34,7 +34,7 @@ export const BlogsService = {
       }
     `;
 
-    const result = await request<{ blogs: BlogsType[] }>(graphqlAPI, query);
+    const result = await request<{ blogs: BlogType[] }>(graphqlAPI, query);
     return result.blogs;
   },
 
@@ -62,7 +62,7 @@ export const BlogsService = {
       }
     `;
 
-    const result = await request<{ blogs: BlogsType[] }>(graphqlAPI, query);
+    const result = await request<{ blogs: BlogType[] }>(graphqlAPI, query);
     return result.blogs;
   },
 
@@ -78,7 +78,7 @@ export const BlogsService = {
 
     const result = await request<{ categories: CategoryType[] }>(
       graphqlAPI,
-      query
+      query,
     );
     return result.categories;
   },
@@ -113,7 +113,7 @@ export const BlogsService = {
       }
     `;
 
-    const result = await request<{ blog: BlogsType }>(graphqlAPI, query, {
+    const result = await request<{ blog: BlogType }>(graphqlAPI, query, {
       slug,
     });
     return result.blog;
@@ -148,7 +148,7 @@ export const BlogsService = {
       }
     `;
 
-    const result = await request<{ blogs: BlogsType[] }>(graphqlAPI, query, {
+    const result = await request<{ blogs: BlogType[] }>(graphqlAPI, query, {
       slug,
     });
     return result.blogs;

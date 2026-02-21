@@ -1,6 +1,7 @@
 export const appConfig = {
-  metaTitle: "Next Blog App",
+  metaTitle: "My Blog App",
   metaDescription: "All blogs about IT",
-  metaKeywords: "blogs, next js",
-  author: "John Doe",
+  metaKeywords:
+    "blogs, blog, next js, react js, node js, programming, web development, software engineering",
+  author: "Asadbek Rakhimov",
 };

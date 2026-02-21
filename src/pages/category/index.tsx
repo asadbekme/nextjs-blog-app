@@ -1,11 +1,11 @@
 import { GetServerSideProps } from "next";
-import { CategoryType } from "src/interfaces/categories.interface";
-import Layout from "src/layout/layout";
-import { BlogsService } from "src/services/blog.service";
+import { CategoryType } from "@/types/category";
+import Layout from "@/layout/layout";
+import { BlogsService } from "@/services/blog.service";
 import { Box } from "@mui/system";
 import { Typography, ButtonGroup, Button } from "@mui/material";
 import { useRouter } from "next/router";
-import SEO from "src/layout/seo/seo";
+import SEO from "@/layout/seo/seo";
 
 const CategoryPage = ({ categories }: CategoryPageProps) => {
   const router = useRouter();
@@ -34,7 +34,10 @@ const CategoryPage = ({ categories }: CategoryPageProps) => {
           <ButtonGroup
             variant="contained"
             aria-label="outlined primary button group"
-            sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'initial' } }}
+            sx={{
+              display: "flex",
+              flexDirection: { xs: "column", md: "initial" },
+            }}
           >
             {categories.map((category) => (
               <Button
@@ -54,7 +57,9 @@ const CategoryPage = ({ categories }: CategoryPageProps) => {
 
 export default CategoryPage;
 
-export const getServerSideProps: GetServerSideProps<CategoryPageProps> = async () => {
+export const getServerSideProps: GetServerSideProps<
+  CategoryPageProps
+> = async () => {
   const categories = await BlogsService.getCategories();
 
   return {

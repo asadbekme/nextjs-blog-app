@@ -1,11 +1,11 @@
 import { GetServerSideProps } from "next";
 import { Box } from "@mui/system";
-import Layout from "src/layout/layout";
-import { Content, Hero, Sidebar } from "src/components";
-import { BlogsService } from "src/services/blog.service";
-import { BlogsType } from "src/interfaces/blogs.interface";
-import { CategoryType } from "src/interfaces/categories.interface";
-import SEO from "src/layout/seo/seo";
+import Layout from "@/layout/layout";
+import { Content, Hero, Sidebar } from "@/components";
+import { BlogsService } from "@/services/blog.service";
+import { BlogType } from "@/types/blog";
+import { CategoryType } from "@/types/category";
+import SEO from "@/layout/seo/seo";
 
 const IndexPage = ({ blogs, latestBlogs, categories }: HomePageProps) => {
   return (
@@ -47,7 +47,7 @@ export const getServerSideProps: GetServerSideProps<
 };
 
 interface HomePageProps {
-  blogs: BlogsType[];
-  latestBlogs: BlogsType[];
+  blogs: BlogType[];
+  latestBlogs: BlogType[];
   categories: CategoryType[];
 }

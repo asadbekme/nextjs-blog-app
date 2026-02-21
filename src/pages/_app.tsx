@@ -1,11 +1,11 @@
 import Head from "next/head";
 import type { AppProps } from "next/app";
-import "src/styles/globals.css";
+import "@/styles/globals.css";
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import { ThemeProvider } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
-import createEmotionCache from "src/helpers/create-emotion-cache";
-import theme from "src/helpers/theme";
+import createEmotionCache from "@/helpers/create-emotion-cache";
+import theme from "@/helpers/theme";
 import { useEffect } from "react";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";

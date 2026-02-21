@@ -1,10 +1,10 @@
 import { GetServerSideProps } from "next";
-import { BlogsType } from "src/interfaces/blogs.interface";
-import Layout from "src/layout/layout";
-import { BlogsService } from "src/services/blog.service";
+import { BlogType } from "@/types/blog";
+import Layout from "@/layout/layout";
+import { BlogsService } from "@/services/blog.service";
 import { Box } from "@mui/system";
-import { Content } from "src/components";
-import SEO from "src/layout/seo/seo";
+import { Content } from "@/components";
+import SEO from "@/layout/seo/seo";
 
 const BlogPage = ({ blogs }: BlogPageProps) => {
   return (
@@ -41,5 +41,5 @@ export const getServerSideProps: GetServerSideProps<
 };
 
 interface BlogPageProps {
-  blogs: BlogsType[];
+  blogs: BlogType[];
 }

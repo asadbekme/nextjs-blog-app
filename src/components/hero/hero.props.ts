@@ -1,5 +1,5 @@
-import { BlogsType } from "src/interfaces/blogs.interface";
+import { BlogType } from "@/types/blog";
 
 export interface HeroProps {
-  blogs: BlogsType[];
+  blogs: BlogType[];
 }

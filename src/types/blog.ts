@@ -1,4 +1,4 @@
-export interface BlogsType {
+export interface BlogType {
   excerpt: string;
   id: string;
   slug: string;

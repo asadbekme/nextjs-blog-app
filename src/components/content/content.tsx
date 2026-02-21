@@ -3,7 +3,7 @@ import { Box } from "@mui/system";
 import { Avatar, Divider, Typography } from "@mui/material";
 import { format } from "date-fns";
 import { ContentProps } from "./content.props";
-import { calculateEstimatedTimeToRead } from "src/helpers/time.format";
+import { calculateEstimatedTimeToRead } from "@/helpers/time.format";
 import { useRouter } from "next/router";
 // import Link from "next/link";
 

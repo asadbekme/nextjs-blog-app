@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { appConfig } from "src/config/app.config";
+import { appConfig } from "@/config/app.config";
 import { SEOProps } from "./seo.props";
 
 const SEO = ({

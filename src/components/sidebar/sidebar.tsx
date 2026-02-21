@@ -5,7 +5,7 @@ import { Fragment } from "react";
 import { format } from "date-fns";
 import { SidebarProps } from "./sidebar.props";
 import { useRouter } from "next/router";
-// import { data, navItems } from "src/config/constants";
+// import { data, navItems } from "@/config/constants";
 
 const Sidebar = ({ latestBlogs, categories }: SidebarProps) => {
   const router = useRouter();

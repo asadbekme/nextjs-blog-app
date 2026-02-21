@@ -2,16 +2,20 @@ import { Avatar, Divider, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { GetServerSideProps } from "next";
 import Image from "next/image";
-import { Sidebar } from "src/components";
-import { calculateEstimatedTimeToRead } from "src/helpers/time.format";
-import { BlogsType } from "src/interfaces/blogs.interface";
-import { CategoryType } from "src/interfaces/categories.interface";
-import Layout from "src/layout/layout";
-import { BlogsService } from "src/services/blog.service";
+import { Sidebar } from "@/components";
+import { calculateEstimatedTimeToRead } from "@/helpers/time.format";
+import { BlogType } from "@/types/blog";
+import { CategoryType } from "@/types/category";
+import Layout from "@/layout/layout";
+import { BlogsService } from "@/services/blog.service";
 import { format } from "date-fns";
-import SEO from "src/layout/seo/seo";
+import SEO from "@/layout/seo/seo";
 
-const DetailedBlogsPage = ({ blog, latestBlogs, categories }: DetailedBlogsPageProps) => {
+const DetailedBlogsPage = ({
+  blog,
+  latestBlogs,
+  categories,
+}: DetailedBlogsPageProps) => {
   return (
     <SEO metaTitle={blog.title}>
       <Layout>
@@ -82,7 +86,9 @@ const DetailedBlogsPage = ({ blog, latestBlogs, categories }: DetailedBlogsPageP
 
 export default DetailedBlogsPage;
 
-export const getServerSideProps: GetServerSideProps<DetailedBlogsPageProps> = async ({ query }) => {
+export const getServerSideProps: GetServerSideProps<
+  DetailedBlogsPageProps
+> = async ({ query }) => {
   const blog = await BlogsService.getDetailedBlogs(query.slug as string);
   const latestBlogs = await BlogsService.getLatestBlogs();
   const categories = await BlogsService.getCategories();
@@ -97,7 +103,7 @@ export const getServerSideProps: GetServerSideProps<DetailedBlogsPageProps> = as
 };
 
 interface DetailedBlogsPageProps {
-  blog: BlogsType;
-  latestBlogs: BlogsType[];
+  blog: BlogType;
+  latestBlogs: BlogType[];
   categories: CategoryType[];
 }

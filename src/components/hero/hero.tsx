@@ -4,7 +4,7 @@ import { Avatar, Box, Typography } from "@mui/material";
 import Image from "next/image";
 import { format } from "date-fns";
 import { HeroProps } from "./hero.props";
-import { calculateEstimatedTimeToRead } from "src/helpers/time.format";
+import { calculateEstimatedTimeToRead } from "@/helpers/time.format";
 
 const Hero = ({ blogs }: HeroProps) => {
   const responsive = {

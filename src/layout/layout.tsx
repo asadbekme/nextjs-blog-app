@@ -1,5 +1,5 @@
 import { Box } from "@mui/system";
-import { Navbar, Footer } from "src/components";
+import { Navbar, Footer } from "@/components";
 import { LayoutProps } from "./layout.props";
 
 const Layout = ({ children }: LayoutProps): JSX.Element => {
