@@ -1,8 +1,7 @@
 import { request, gql } from "graphql-request";
 import { BlogType } from "@/types/blog";
 import { CategoryType } from "@/types/category";
-
-const graphqlAPI = process.env.NEXT_PUBLIC_HYGRAPH_ENDPOINT as string;
+import { GRAPHQLAPI } from "@/config/constants";
 
 export const BlogsService = {
   async getAllBlogs() {
@@ -34,7 +33,7 @@ export const BlogsService = {
       }
     `;
 
-    const result = await request<{ blogs: BlogType[] }>(graphqlAPI, query);
+    const result = await request<{ blogs: BlogType[] }>(GRAPHQLAPI, query);
     return result.blogs;
   },
 
@@ -62,7 +61,7 @@ export const BlogsService = {
       }
     `;
 
-    const result = await request<{ blogs: BlogType[] }>(graphqlAPI, query);
+    const result = await request<{ blogs: BlogType[] }>(GRAPHQLAPI, query);
     return result.blogs;
   },
 
@@ -77,13 +76,13 @@ export const BlogsService = {
     `;
 
     const result = await request<{ categories: CategoryType[] }>(
-      graphqlAPI,
+      GRAPHQLAPI,
       query,
     );
     return result.categories;
   },
 
-  async getDetailedBlogs(slug: string) {
+  async getDetailedBlog(slug: string) {
     const query = gql`
       query GetDetailedBlog($slug: String!) {
         blog(where: { slug: $slug }) {
@@ -113,7 +112,7 @@ export const BlogsService = {
       }
     `;
 
-    const result = await request<{ blog: BlogType }>(graphqlAPI, query, {
+    const result = await request<{ blog: BlogType }>(GRAPHQLAPI, query, {
       slug,
     });
     return result.blog;
@@ -148,7 +147,7 @@ export const BlogsService = {
       }
     `;
 
-    const result = await request<{ blogs: BlogType[] }>(graphqlAPI, query, {
+    const result = await request<{ blogs: BlogType[] }>(GRAPHQLAPI, query, {
       slug,
     });
     return result.blogs;

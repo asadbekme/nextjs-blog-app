@@ -10,18 +10,20 @@ import Layout from "@/layout/layout";
 import { BlogsService } from "@/services/blog.service";
 import { format } from "date-fns";
 import SEO from "@/layout/seo/seo";
+import { formatMetaDescription } from "@/helpers/text.format";
 
-const DetailedBlogsPage = ({
+const DetailedBlogPage = ({
   blog,
   latestBlogs,
   categories,
-}: DetailedBlogsPageProps) => {
+}: DetailedBlogPageProps) => {
   return (
     <SEO
       metaTitle={blog.title}
-      metaDescription={blog.description.text}
+      metaDescription={formatMetaDescription(blog.description.text)}
       opengraphImage={blog.image.url}
-      // opengraphUrl={`https://blog-app.asadbekjs.uz/blog/${blog.slug}`}
+      opengraphUrl={`https://blog-app.asadbekjs.uz/blog/${blog.slug}`}
+      type="article"
     >
       <Layout>
         <Box
@@ -89,12 +91,12 @@ const DetailedBlogsPage = ({
   );
 };
 
-export default DetailedBlogsPage;
+export default DetailedBlogPage;
 
 export const getServerSideProps: GetServerSideProps<
-  DetailedBlogsPageProps
+  DetailedBlogPageProps
 > = async ({ query }) => {
-  const blog = await BlogsService.getDetailedBlogs(query.slug as string);
+  const blog = await BlogsService.getDetailedBlog(query.slug as string);
   const latestBlogs = await BlogsService.getLatestBlogs();
   const categories = await BlogsService.getCategories();
 
@@ -107,7 +109,7 @@ export const getServerSideProps: GetServerSideProps<
   };
 };
 
-interface DetailedBlogsPageProps {
+interface DetailedBlogPageProps {
   blog: BlogType;
   latestBlogs: BlogType[];
   categories: CategoryType[];

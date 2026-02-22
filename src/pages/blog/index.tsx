@@ -8,7 +8,10 @@ import SEO from "@/layout/seo/seo";
 
 const BlogPage = ({ blogs }: BlogPageProps) => {
   return (
-    <SEO metaTitle="All Blogs">
+    <SEO
+      metaTitle="All Blogs"
+      metaDescription="Read all blogs about programming, web development, and software engineering. Stay updated with the latest trends and insights in the tech world."
+    >
       <Layout>
         <Box
           sx={{

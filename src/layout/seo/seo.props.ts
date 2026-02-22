@@ -9,4 +9,5 @@ export interface SEOProps {
   metaKeywords?: string;
   opengraphImage?: string;
   opengraphUrl?: string;
+  type?: "website" | "article";
 }

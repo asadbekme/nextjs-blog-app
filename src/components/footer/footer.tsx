@@ -1,10 +1,30 @@
 import { Box, Typography } from "@mui/material";
-import TelegramIcon from "@mui/icons-material/Telegram";
-import YouTubeIcon from "@mui/icons-material/YouTube";
-import InstagramIcon from "@mui/icons-material/Instagram";
 import { format } from "date-fns";
+import Link from "next/link";
+import { GitHub, LinkedIn, Telegram } from "@mui/icons-material";
 
 const Footer = () => {
+  const socialMediaLinks = [
+    {
+      name: "LinkedIn",
+      icon: <LinkedIn />,
+      url: "https://www.linkedin.com/in/asadbek-rakhimov",
+      color: "#0077B5",
+    },
+    {
+      name: "Github",
+      icon: <GitHub />,
+      url: "https://github.com/asadbekme",
+      color: "#ffffff",
+    },
+    {
+      name: "Telegram",
+      icon: <Telegram />,
+      url: "https://t.me/asadbekodev",
+      color: "#0088cc",
+    },
+  ];
+
   return (
     <Box
       padding={"20px"}
@@ -21,15 +41,17 @@ const Footer = () => {
         © {format(new Date(), "yyyy")} Blogs. All rights reserved.
       </Typography>
       <Box sx={{ display: "flex", gap: "20px" }}>
-        <TelegramIcon
-          sx={{ cursor: "pointer", "&:hover": { color: "#F57D00" } }}
-        />
-        <YouTubeIcon
-          sx={{ cursor: "pointer", "&:hover": { color: "#F57D00" } }}
-        />
-        <InstagramIcon
-          sx={{ cursor: "pointer", "&:hover": { color: "#F57D00" } }}
-        />
+        {socialMediaLinks.map((link) => (
+          <Link
+            key={link.name}
+            href={link.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: link.color, fontSize: "24px" }}
+          >
+            {link.icon}
+          </Link>
+        ))}
       </Box>
     </Box>
   );

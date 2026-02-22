@@ -1,3 +1,5 @@
+export const GRAPHQLAPI = process.env.NEXT_PUBLIC_HYGRAPH_ENDPOINT as string;
+
 export const navItems = [
   {
     route: "/",
