@@ -96,9 +96,11 @@ export default DetailedBlogPage;
 export const getServerSideProps: GetServerSideProps<
   DetailedBlogPageProps
 > = async ({ query }) => {
-  const blog = await BlogsService.getDetailedBlog(query.slug as string);
-  const latestBlogs = await BlogsService.getLatestBlogs();
-  const categories = await BlogsService.getCategories();
+  const [blog, latestBlogs, categories] = await Promise.all([
+    BlogsService.getDetailedBlog(query.slug as string),
+    BlogsService.getLatestBlogs(),
+    BlogsService.getCategories(),
+  ]);
 
   return {
     props: {
