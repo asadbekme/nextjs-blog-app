@@ -1,22 +1,20 @@
-import { GetServerSideProps } from "next";
+import { GetStaticPaths, GetStaticProps } from "next";
 import { Box } from "@mui/system";
 import { BlogType } from "@/types/blog";
 import { CategoryType } from "@/types/category";
 import Layout from "@/layout/layout";
 import { BlogsService } from "@/services/blog.service";
 import { Content, Sidebar } from "@/components";
-import { useRouter } from "next/router";
 import SEO from "@/layout/seo/seo";
 
 const CategoryDetailedPage = ({
   blogs,
   latestBlogs,
   categories,
+  slug,
 }: DetailedCategoryBlogsPageProps) => {
-  const router = useRouter();
-
   return (
-    <SEO metaTitle={`${router.query.slug}-category`}>
+    <SEO metaTitle={`${slug} category`}>
       <Layout>
         <Box
           sx={{
@@ -36,21 +34,29 @@ const CategoryDetailedPage = ({
 
 export default CategoryDetailedPage;
 
-export const getServerSideProps: GetServerSideProps<
+export const getStaticPaths: GetStaticPaths = async () => {
+  const categories = await BlogsService.getCategories();
+
+  return {
+    paths: categories.map((category) => ({
+      params: { slug: category.slug },
+    })),
+    fallback: "blocking",
+  };
+};
+
+export const getStaticProps: GetStaticProps<
   DetailedCategoryBlogsPageProps
-> = async ({ query }) => {
+> = async ({ params }) => {
   const [blogs, latestBlogs, categories] = await Promise.all([
-    BlogsService.getDetailedCategoryBlogs(query.slug as string),
+    BlogsService.getDetailedCategoryBlogs(params?.slug as string),
     BlogsService.getLatestBlogs(),
     BlogsService.getCategories(),
   ]);
 
   return {
-    props: {
-      blogs,
-      latestBlogs,
-      categories,
-    },
+    props: { blogs, latestBlogs, categories, slug: params?.slug as string },
+    revalidate: 60,
   };
 };
 
@@ -58,4 +64,5 @@ interface DetailedCategoryBlogsPageProps {
   blogs: BlogType[];
   latestBlogs: BlogType[];
   categories: CategoryType[];
+  slug: string;
 }

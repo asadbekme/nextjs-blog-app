@@ -152,4 +152,20 @@ export const BlogsService = {
     });
     return result.blogs;
   },
+
+  async getAllSlugs(): Promise<{ slug: string }[]> {
+    const query = gql`
+      query GetAllSlugs {
+        blogs {
+          slug
+        }
+      }
+    `;
+
+    const result = await request<{ blogs: { slug: string }[] }>(
+      GRAPHQLAPI,
+      query,
+    );
+    return result.blogs;
+  },
 };

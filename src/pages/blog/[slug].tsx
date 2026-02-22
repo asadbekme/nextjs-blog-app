@@ -1,6 +1,6 @@
 import { Avatar, Divider, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import { GetServerSideProps } from "next";
+import { GetStaticPaths, GetStaticProps } from "next";
 import Image from "next/image";
 import { Sidebar } from "@/components";
 import { calculateEstimatedTimeToRead } from "@/helpers/time.format";
@@ -93,21 +93,27 @@ const DetailedBlogPage = ({
 
 export default DetailedBlogPage;
 
-export const getServerSideProps: GetServerSideProps<
-  DetailedBlogPageProps
-> = async ({ query }) => {
+export const getStaticPaths: GetStaticPaths = async () => {
+  const blogs = await BlogsService.getAllSlugs();
+
+  return {
+    paths: blogs.map((blog) => ({ params: { slug: blog.slug } })),
+    fallback: "blocking",
+  };
+};
+
+export const getStaticProps: GetStaticProps<DetailedBlogPageProps> = async ({
+  params,
+}) => {
   const [blog, latestBlogs, categories] = await Promise.all([
-    BlogsService.getDetailedBlog(query.slug as string),
+    BlogsService.getDetailedBlog(params?.slug as string),
     BlogsService.getLatestBlogs(),
     BlogsService.getCategories(),
   ]);
 
   return {
-    props: {
-      blog,
-      latestBlogs,
-      categories,
-    },
+    props: { blog, latestBlogs, categories },
+    revalidate: 60,
   };
 };
 
